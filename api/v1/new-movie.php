@@ -1,9 +1,17 @@
 <?php
+//database connection
 require "config.php";
-$response = [];
+
+//checking request method
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    //checking if input is not empty
     if(!empty($_POST["input"])){
+
+        //saving input parameters as "input"
         $input = json_decode($_POST["input"]);
+
+        //saving input array into database
         DB::query("INSERT INTO movies VALUES(
             :tconst,
             :titleType,
@@ -17,6 +25,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             ":runtimeMinutes"=>$input[0]->runtimeMinutes,
             ":genres"=>$input[0]->genres
         ));
+
+
         $response = "success";
     }else{
         $response = "required field missing";
@@ -24,5 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }else{
     $response = "invalid request method";
 }
+
+//returning response as JSON
 echo json_encode($response);
 ?>

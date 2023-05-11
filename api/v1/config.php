@@ -1,7 +1,12 @@
 <?php
+
     class DB {
         private static function connect(){
-         $pdo = new PDO("mysql:hostname=localhost;dbname=onito;charset=UTF8","root",""); 
+         $host = 'localhost';
+         $dbname = 'onito';
+         $user = 'root';
+         $password = '';
+         $pdo = new PDO("mysql:hostname=$host;dbname=$dbname;charset=UTF8",$user,$password); 
          $pdo->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
          return $pdo;
         }
